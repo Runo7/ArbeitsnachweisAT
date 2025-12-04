@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Digitaler Arbeitsnachweis – ALFATEC24 GmbH</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google Font -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Externe CSS-Datei -->
+  <link rel="stylesheet" href="arbeitsnachweis.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <div id="work-order" class="work-card">
+      <!-- Kopfbereich / Firmenblock -->
+      <header class="header">
+        <div class="header-left">
+          <div class="logo-row">
+            <!-- DEIN LOGO HIER -->
+            <img
+              src="images/alfa24.png"
+              alt="ALFATEC24 Logo"
+              class="company-logo"
+            />
+            <div class="logo-text">
+              <div class="company-name">ALFATEC24 GmbH</div>
+              <div class="company-tagline">
+                Digitaler Arbeitsnachweis für Heizungs-, Wärmepumpen- und Bauprojekte
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <div class="company-contact">
+            <div>ALFATEC24 GmbH</div>
+            <div>Schwedenstraße 9, 13359 Berlin</div>
+            <div>Tel: +49 30 49931140</div>
+            <div>Email: <a href="mailto:info@alfatec-24.de">info@alfatec-24.de</a></div>
+          </div>
+
+          <div class="doc-meta">
+            <div>
+              <span>Datum:</span>
+              <strong id="today-date"></strong>
+            </div>
+            <div class="doc-meta-row">
+              <span>Auftrags-Nr.:</span>
+              <input
+                id="job-number"
+                class="meta-input"
+                placeholder="z.B. 2025-001"
+              />
+            </div>
+            <!-- live-pill wurde komplett entfernt -->
+          </div>
+        </div>
+      </header>
+
+      <!-- Auftrag & Kunde -->
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">Auftrag &amp; Kunde</h2>
+          <p class="section-sub">Grunddaten zum Einsatz</p>
+        </div>
+
+        <div class="grid-2">
+          <div>
+            <div class="field">
+              <label class="field-label">
+                <span class="main">Auftrag / Projekt</span>
+                <span class="hint">Kurzbeschreibung</span>
+              </label>
+              <input
+                id="job-title"
+                class="field-input"
+                placeholder="z.B. Wärmepumpe EFH Müller – Austausch Gastherme"
+              />
+            </div>
+
+            <div class="field">
+              <label class="field-label">
+                <span class="main">Kunde</span>
+                <span class="hint">Name &amp; Adresse</span>
+              </label>
+              <textarea
+                id="customer-info"
+                class="field-textarea"
+                placeholder="z.B. Familie Müller&#10;Beispielstraße 12&#10;12345 Berlin"
+              ></textarea>
+            </div>
+          </div>
+
+          <div>
+            <div class="field">
+              <label class="field-label">
+                <span class="main">Auftragsart</span>
+                <span class="hint">steuert Materialvorschlag</span>
+              </label>
+              <select id="job-type" class="field-select">
+                <option value="">Bitte wählen...</option>
+                <option value="daikin-heatpump">Wärmepumpe (Daikin)</option>
+                <!-- Weitere Auftragsarten kannst du später hinzufügen -->
+              </select>
+            </div>
+
+            <div class="field">
+              <label class="field-label">
+                <span class="main">Kurzbeschreibung Arbeiten</span>
+                <span class="hint">optional</span>
+              </label>
+              <textarea
+                id="job-description"
+                class="field-textarea"
+                placeholder="z.B. Außengerät aufgestellt, hydraulischer Anschluss, Inbetriebnahme vorbereitet, Altanlage demontiert..."
+              ></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Materialeinsatz -->
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">Materialeinsatz</h2>
+          <p class="section-sub">
+            Wird anhand der Auftragsart vorbelegt – Mengen eintragen oder anpassen
+          </p>
+        </div>
+
+        <div class="materials-wrapper">
+          <div class="materials-header-row">
+            <div>Material / Position</div>
+            <div class="materials-header-qty">Menge</div>
+            <div>Einheit</div>
+          </div>
+
+          <div id="materials-body">
+            <div class="materials-placeholder">
+              Wähle oben eine <strong>Auftragsart</strong>, um eine Materialliste vorzuschlagen.
+            </div>
+          </div>
+
+          <div class="materials-footer">
+            <div class="field">
+              <label class="field-label">
+                <span class="main">Sonstiges Material / Bemerkungen</span>
+                <span class="hint">alles, was nicht oben erfasst ist</span>
+              </label>
+              <textarea
+                id="materials-notes"
+                class="field-textarea"
+                placeholder="z.B. Kleinmaterial, zusätzliche Ventile, unerwartete Anpassungen..."
+              ></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Arbeitszeiten & Leistung -->
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">Arbeitszeiten &amp; Leistung</h2>
+          <p class="section-sub">Kurz festhalten, was wann gemacht wurde</p>
+        </div>
+
+        <div class="grid-2">
+          <div>
+            <div class="field">
+              <label class="field-label">
+                <span class="main">Monteur(e)</span>
+                <span class="hint">Namen</span>
+              </label>
+              <input
+                id="technicians"
+                class="field-input"
+                placeholder="Monteur"
+              />
+            </div>
+
+            <div class="field">
+              <label class="field-label">
+                <span class="main">Arbeitszeit</span>
+                <span class="hint">von / bis</span>
+              </label>
+              <input
+                id="work-time"
+                class="field-input"
+                placeholder="z.B. 08:00 – 16:30 Uhr"
+              />
+            </div>
+          </div>
+
+          <div>
+            <div class="field">
+              <label class="field-label">
+                <span class="main">Leistungsbeschreibung</span>
+                <span class="hint">stichpunktartig</span>
+              </label>
+              <textarea
+                id="work-description"
+                class="field-textarea"
+                placeholder="z.B.&#10;- Alte Gastherme demontiert&#10;- Wärmepumpe hydraulisch eingebunden&#10;- Leitungen gedämmt&#10;- Anlage befüllt und entlüftet"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Unterschriften -->
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">Digitale Unterschriften</h2>
+          <p class="section-sub">Direkt auf dem Display unterschreiben lassen</p>
+        </div>
+
+        <div class="sign-grid">
+          <!-- Monteur -->
+          <div class="sign-card">
+            <div class="sign-label-row">
+              <span class="main">Monteur</span>
+              <span>Bestätigung ausgeführter Arbeiten</span>
+            </div>
+            <div class="sign-canvas-wrapper">
+              <canvas id="signature-tech" class="signature"></canvas>
+              <div class="sign-placeholder">Mit Finger oder Maus unterschreiben</div>
+            </div>
+            <div class="sign-actions">
+              <button type="button" class="btn-ghost" data-clear="signature-tech">
+                Löschen
+              </button>
+            </div>
+          </div>
+
+          <!-- Kunde -->
+          <div class="sign-card">
+            <div class="sign-label-row">
+              <span class="main">Kunde</span>
+              <span>Auftrag &amp; Leistung sind vereinbart / erfolgt</span>
+            </div>
+            <div class="sign-canvas-wrapper">
+              <canvas id="signature-customer" class="signature"></canvas>
+              <div class="sign-placeholder">Kunde unterschreibt hier</div>
+            </div>
+            <div class="sign-actions">
+              <button
+                type="button"
+                class="btn-ghost"
+                data-clear="signature-customer"
+              >
+                Löschen
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer-note">
+        Dieser Arbeitsnachweis gehört zur ALFATEC24 GmbH – bitte sorgfältig ausfüllen und
+        vom Kunden unterschreiben lassen.
+      </footer>
+    </div>
+
+    <!-- Hinweis & Button unten rechts
+    <div class="submit-note">
+      Der Arbeitsnachweis wird als Bild gespeichert.
+      Du kannst ihn anschließend z.B. per E-Mail weiterleiten.
+    </div>
+-->
+    <div class="floating-action">
+      <button id="send-button" class="btn-primary" type="button">
+        <span>Done</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- html2canvas für Screenshot-Export -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <!-- Externe JS-Datei -->
+  <script src="arbeitsnachweis.js"></script>
+</body>
+</html>
